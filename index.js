@@ -20,8 +20,7 @@ rtm.on(RTM_EVENTS.MESSAGE, (message) => {
   if(ticker) {
     stocks.getquote([ticker])
       .then((json) => {
-        console.log(json);
-        const img = `http://chart.finance.yahoo.com/z?s=${ticker}&z=l&t=1d`;
+        const img = `http://chart.finance.yahoo.com/z?s=i${ticker}&z=l&t=1d&z=l`;
         const emoji = (json[0].PercentChange.match(/^\+/))? '💵' : '⚰';
         const body = {
           as_user: true,
