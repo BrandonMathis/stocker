@@ -20,15 +20,27 @@ rtm.on(RTM_EVENTS.MESSAGE, (message) => {
   if(ticker) {
     stocks.getquote([ticker])
       .then((json) => {
+        console.log(json);
         const img = `http://chart.finance.yahoo.com/z?s=${ticker}&z=l&t=1d&z=l`;
         const emoji = (json[0].PercentChange.match(/^\+/))? '💵' : '⚰';
         const body = {
           as_user: true,
           attachments: [
             {
-                pretext: json[0].Name,
-                text: emoji + ' ' + json[0].PercentChange,
-                image_url: img
+              pretext: json[0].Name,
+              text: `${emoji} ${json[0].PercentChange} [Open ${json[0].Open}]`,
+              image_url: img,
+              color: "#36a64f",
+              fields: [
+                {
+                  title: 'Open',
+                  value: json[0].Open
+                },
+                {
+                  title: 'Current',
+                  value: json[0].Open
+                }
+              ]
             }
           ]
         };
