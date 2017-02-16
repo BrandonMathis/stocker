@@ -26,7 +26,8 @@ rtm.on(RTM_EVENTS.MESSAGE, (message) => {
           as_user: true,
           attachments: [
             {
-              pretext: json[0].Name,
+              title: `${json[0].Name}`,
+              title_link: `http://finance.yahoo.com/quote/${ticker}`,
               text: `${emoji} ${json[0].PercentChange} [Open $${json[0].Open}]`,
               image_url: img,
               color: color,
