@@ -18,7 +18,7 @@ rtm.on(RTM_EVENTS.MESSAGE, (message) => {
   if(ticker) {
     stocks.getquote([ticker])
       .then((json) => {
-        const img = `http://chart.finance.yahoo.com/z?s=${ticker}&z=l&t=1d&z=l`;
+        const img = `http://chart.finance.yahoo.com/z?s=${ticker.toUpperCase()}&z=l&t=1d&z=l`;
         const positive = json[0].PercentChange.match(/^\+/);
         const emoji = (positive)? '💵' : '⚰';
         const color = (positive)?  '#36a64f' : '#e11d1d';
@@ -45,7 +45,7 @@ rtm.on(RTM_EVENTS.MESSAGE, (message) => {
                 {
                   short: true,
                   title: 'Percent Change From Year Low',
-                  value: `${json[0].PercentChangeFromYearLow}%`
+                  value: `${json[0].PercentChangeFromYearLow}`
                 },
                 {
                   short: true,
